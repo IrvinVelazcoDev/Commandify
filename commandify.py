@@ -3,7 +3,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
 from cred import logo
-import t
+
 try:
     load_dotenv()
 except Exception as e:
@@ -34,7 +34,9 @@ def queue_request():
 
         song_choice = input("What song number would you like to choose? ")
 
+
         try:
+
             choice_num  = int(song_choice) - 1
             if 0 <= choice_num < len(tracks):
                 print(f"Adding {tracks[choice_num]['name']} to queue")
@@ -60,30 +62,53 @@ def pause_song():
 def resume_song():
     sp.start_playback()
 
+def current_song():
+
+    current_tracks = sp.current_user_playing_track()
+    current_track = current_tracks['item']
+    print (current_track['name'])
+
+
+def manipulate_song(operation_1):
+    if operation_1 == '1':
+        next_song()
+    elif operation_1 == '2':
+        previous_song()
+    elif operation_1 == '3':
+        pause_song()
+    elif operation_1 == '4':
+        resume_song()
+    elif operation_1 == '5':
+        current_song()
+    elif operation_1 == '6':
+        return
 
 
 def menu():
     while True:
-        print("1.Queue a song")
-        print("2.Skip to next song")
-        print("3.Previous song")
-        print("4.Pause song")
-        print("5.Resume song")
+        print("1.Manipulate song")
+        print("2.Queue song")
+        print("3.Just view song")
         operation = input("What we doing now?: ")
         if operation == '1':
-            queue_request()
+            print("1.Skip to next song")
+            print("2.Previous song")
+            print("3.Pause song")
+            print("4.Resume song")
+            print('5.Preview')
+            print('6.exit')
+
+            operation_1 = input("So whats the haps?")
+            manipulate_song(operation_1)
 
         elif operation == '2':
-            next_song()
+            print('Pick a song Jackass')
+            queue_request()
+
 
         elif operation == '3':
-            previous_song()
-
-        elif operation == '4':
-            pause_song()
-
-        elif operation == "5":
-            resume_song()
+            print('your a cuck')
+            current_song()
 
 
 
