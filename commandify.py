@@ -2,7 +2,7 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
-from cred import logo
+from menu import logo
 
 try:
     load_dotenv()
